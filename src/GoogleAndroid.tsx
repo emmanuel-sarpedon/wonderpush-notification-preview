@@ -16,26 +16,26 @@ const currentTime = new Date().toLocaleTimeString([], {
 
 const GoogleAndroid = () => {
    return (
-      <div className="google-android">
-         <div className="speakers">
-            <div className="speaker"></div>
-            <div className="speaker"></div>
-            <div className="speaker"></div>
-            <div className="speaker"></div>
-            <div className="speaker"></div>
-            <div className="speaker"></div>
+      <div className='google-android'>
+         <div className='speakers'>
+            <div className='speaker' />
+            <div className='speaker' />
+            <div className='speaker' />
+            <div className='speaker' />
+            <div className='speaker' />
+            <div className='speaker' />
          </div>
-         <div className="volume volume-up"></div>
-         <div className="volume volume-down"></div>
-         <div className="lock"></div>
-         <div className="screen">
-            <div className="status-bar">
+         <div className='volume volume-up' />
+         <div className='volume volume-down' />
+         <div className='lock' />
+         <div className='screen'>
+            <div className='status-bar'>
                {logosOnTopScreen.map((logo: any, index: number) => (
-                  <img key={index} src={logo} alt="logo" />
+                  <img key={index} src={logo} alt='logo' />
                ))}
             </div>
-            <div className="current-time">{currentTime}</div>
-            <div className="current-date">{currentDate}</div>
+            <div className='current-time'>{currentTime}</div>
+            <div className='current-date'>{currentDate}</div>
          </div>
       </div>
    );
