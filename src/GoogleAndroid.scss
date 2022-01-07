@@ -141,6 +141,95 @@
       letter-spacing: 3px;
       display: flex;
       justify-content: center;
+      margin-bottom: 15px;
+
+    }
+
+    .notification {
+      box-shadow: 0 2.1px 2px lightgrey;
+      cursor: pointer;
+
+      .preview-top {
+        background-color: white;
+        padding: 14px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .app-name {
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          color: grey;
+          margin-bottom: 12px;
+
+          img.bell {
+            height: 13px;
+            margin-right: 7px;
+          }
+
+          img.chevron {
+            height: 10px;
+            margin-left: 7px;
+
+            &.rotate {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        .title {
+          font-size: 14px;
+          color: rgb(30, 30, 30);
+          margin-bottom: 5px;
+        }
+
+        .subtitle {
+          font-size: 13px;
+          color: rgb(100, 100, 100);
+        }
+
+        .app-logo {
+          width: 38px;
+          height: 38px;
+        }
+      }
+
+      .preview-bottom {
+        background-color: white;
+        transition: height 280ms;
+        overflow: hidden;
+        height: 216px;
+
+        > img {
+          display: block;
+          margin: 0 auto 15px auto;
+          width: 92.5%;
+          height: 150px;
+          object-fit: cover;
+        }
+
+        &.hidden {
+          height: 0;
+        }
+      }
+
+      .buttons {
+        padding: 8px;
+        background-color: $grey;
+
+        button {
+          background-color: inherit;
+          border: none;
+          color: grey;
+          padding: 10px 8px;
+
+          &:hover {
+            background-color: #CECFCE;
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 }
