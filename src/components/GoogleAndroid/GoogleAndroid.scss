@@ -1,4 +1,4 @@
-@import "./color";
+@import "../../color";
 
 .google-android {
   position: relative;
@@ -182,11 +182,19 @@
           font-size: 14px;
           color: rgb(30, 30, 30);
           margin-bottom: 5px;
+          width: 300px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
 
-        .subtitle {
+        .message {
           font-size: 13px;
           color: rgb(100, 100, 100);
+          width: 300px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
 
         .app-logo {

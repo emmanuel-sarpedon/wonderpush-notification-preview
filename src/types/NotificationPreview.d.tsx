@@ -1,4 +1,4 @@
-type Platform = 'ios' | 'android' | 'web:ios' | 'web:android' | 'web:macos';
+import { Platform } from './Platform.d';
 
 export default interface NotificationPreviewProps {
    appName?: string;

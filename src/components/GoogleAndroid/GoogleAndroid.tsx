@@ -1,9 +1,15 @@
 import { useState } from 'react';
 
-import logoBluetooth from './assets/logo-bluetooth-grey.svg';
-import logoWifi from './assets/logo-wifi-grey.svg';
-import logoBattery from './assets/logo-battery-grey.svg';
-import logoChevron from './assets/logo-chevron.svg';
+import logoBluetooth from '../../assets/logo-bluetooth-grey.svg';
+import logoWifi from '../../assets/logo-wifi-grey.svg';
+import logoBattery from '../../assets/logo-battery-grey.svg';
+import logoChevron from '../../assets/logo-chevron.svg';
+
+import logoWp from '../../assets/logo-wp.png';
+import logoBell from '../../assets/logo-bell.svg';
+import nyPicture from '../../assets/ny-location.webp';
+
+import NotificationPreviewProps from '../../types/NotificationPreview.d';
 
 const logosOnTopScreen = [logoBluetooth, logoWifi, logoBattery];
 
@@ -12,14 +18,14 @@ const currentDate = new Date().toLocaleDateString('en-EN', {
    month: 'long',
    day: 'numeric',
 });
+
 const currentTime = new Date().toLocaleTimeString([], {
    hour: '2-digit',
    minute: '2-digit',
 });
 
-
-const GoogleAndroid = (props: any) => {
-   const { appName, title, message, icon, image, buttons, badge } = props;
+const GoogleAndroid = (props: NotificationPreviewProps) => {
+   const { appName, title, message, badge, icon, image, buttons  } = props;
 
    const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
 
@@ -55,7 +61,7 @@ const GoogleAndroid = (props: any) => {
                <div className='preview-top'>
                   <div>
                      <div className='app-name'>
-                        <img className='bell' src={badge} alt='logo-bell' />
+                        <img className='bell' src={badge || logoBell} alt='logo-bell' />
                         {appName}
                         <img className={`chevron ${isMinimizedNotification && 'rotate'}`}
                              src={logoChevron}
@@ -63,19 +69,19 @@ const GoogleAndroid = (props: any) => {
                         />
                      </div>
                      <div className='title'>{title}</div>
-                     <div className='subtitle'>{message}</div>
+                     <div className='message'>{message}</div>
                   </div>
 
                   <img style={{ display: isMinimizedNotification ? 'block' : 'none' }}
                        className='app-logo'
-                       src={icon}
+                       src={icon || logoWp}
                        alt={'app-logo'} />
 
                </div>
 
                <div className={`preview-bottom ${isMinimizedNotification && 'hidden'}`}>
                   <img
-                     src={image}
+                     src={image || nyPicture}
                      alt='attached'
                   />
                   <div className='buttons'>
