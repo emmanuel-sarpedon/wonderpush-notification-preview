@@ -18,7 +18,8 @@ const NotificationPreview = () => {
    const [buttonName1, setButtonName1] = useState('reply');
    const [buttonName2, setButtonName2] = useState('ignore');
    const [buttonName3, setButtonName3] = useState('cancel');
-   const [platform, setPlatform] = useState('android' as Platform);
+   const [platform] = useState('android' as Platform);
+   // const [platform, setPlatform] = useState('android' as Platform);
 
    const platformProps = {
       appName: appName,
