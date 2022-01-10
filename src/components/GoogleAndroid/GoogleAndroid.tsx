@@ -10,6 +10,7 @@ import logoBell from '../../assets/logo-bell.svg';
 import nyPicture from '../../assets/ny-location.webp';
 
 import NotificationPreviewProps from '../../types/NotificationPreview.d';
+import { stringUtils } from '../../utils/StringUtils';
 
 const logosOnTopScreen = [logoBluetooth, logoWifi, logoBattery];
 
@@ -25,7 +26,7 @@ const currentTime = new Date().toLocaleTimeString([], {
 });
 
 const GoogleAndroid = (props: NotificationPreviewProps) => {
-   const { appName, title, message, badge, icon, image, buttons  } = props;
+   const { appName, title, message, badge, icon, image, buttons } = props;
 
    const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
 
@@ -79,14 +80,14 @@ const GoogleAndroid = (props: NotificationPreviewProps) => {
 
                </div>
 
-               <div className={`preview-bottom ${isMinimizedNotification && 'hidden'}`}>
+               <div className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''}`}>
                   <img
                      src={image || nyPicture}
                      alt='attached'
                   />
                   <div className='buttons'>
                      {buttons?.map((buttonName: string) => buttonName &&
-                        <button>{buttonName[0].toUpperCase() + buttonName.substring(1)}</button>)}
+                        <button>{stringUtils(buttonName)}</button>)}
                   </div>
                </div>
             </div>

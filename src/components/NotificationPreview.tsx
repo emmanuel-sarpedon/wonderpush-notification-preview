@@ -12,12 +12,12 @@ const NotificationPreview = () => {
    const [title, setTitle] = useState('Notification Preview');
    const [subtitle, setSubtitle] = useState('');
    const [message, setMessage] = useState('Preview your push notification');
-   const [iconUrl, setIconUrl] = useState('');
    const [badgeUrl, setBadgeUrl] = useState('');
-   const [attachedImageUrl, setAttachedImageUrl] = useState('');
-   const [buttonName1, setButtonName1] = useState('reply');
-   const [buttonName2, setButtonName2] = useState('ignore');
-   const [buttonName3, setButtonName3] = useState('cancel');
+   const [iconUrl, setIconUrl] = useState('https://cdn.by.wonderpush.com/assets/images/logo/logo-icon-plain-256x256.png');
+   const [attachedImageUrl, setAttachedImageUrl] = useState('https://cdn.by.wonderpush.com/assets/images/logo/logo-icon-plain-256x256.png');
+   const [buttonName1, setButtonName1] = useState('Reply');
+   const [buttonName2, setButtonName2] = useState('Ignore');
+   const [buttonName3, setButtonName3] = useState('Cancel');
    const [platform] = useState('android' as Platform);
    // const [platform, setPlatform] = useState('android' as Platform);
 
@@ -37,66 +37,85 @@ const NotificationPreview = () => {
       label: 'Your app name',
       value: appName,
       stateCallback: setAppName,
-      inputClassName: 'app-name',
+      HTMLTag: 'input',
+      className: 'app-name',
    }, {
       label: 'Title',
       value: title,
       stateCallback: setTitle,
-      inputClassName: 'title',
+      HTMLTag: 'textarea',
+      className: 'title',
    }, {
       label: 'Subtitle (only for ios)',
       value: subtitle,
       stateCallback: setSubtitle,
-      inputClassName: 'subtitle',
+      HTMLTag: 'textarea',
+      className: 'subtitle',
    }, {
       label: 'Message',
       value: message,
       stateCallback: setMessage,
-      inputClassName: 'message',
+      HTMLTag: 'textarea',
+      className: 'message',
    }, {
       label: 'Badge',
       value: badgeUrl,
       stateCallback: setBadgeUrl,
-      inputClassName: 'badge',
+      HTMLTag: 'input',
+      className: 'badge',
    }, {
       label: 'Icon',
       value: iconUrl,
       stateCallback: setIconUrl,
-      inputClassName: 'icon',
+      HTMLTag: 'input',
+      className: 'icon',
    }, {
       label: 'Attached image',
       value: attachedImageUrl,
       stateCallback: setAttachedImageUrl,
-      inputClassName: 'attached-image',
+      HTMLTag: 'input',
+      className: 'attached-image',
    }, {
       label: 'Button 1',
       value: buttonName1,
       stateCallback: setButtonName1,
-      inputClassName: 'button-name',
+      HTMLTag: 'input',
+      className: 'button-name',
    }, {
       label: 'Button 2',
       value: buttonName2,
       stateCallback: setButtonName2,
-      inputClassName: 'button-name',
+      HTMLTag: 'input',
+      className: 'button-name',
    }, {
       label: 'Button 3',
       value: buttonName3,
       stateCallback: setButtonName3,
-      inputClassName: 'button-name',
+      HTMLTag: 'input',
+      className: 'button-name',
    }];
 
    return (
       <div className='notification-preview'>
          <form className='form-notification-params'>
             {formFields.map(field => {
-               return (
-                  <label>{field.label}
-                     <input type='text'
-                            value={field.value}
-                            onChange={(e: React.FormEvent<HTMLInputElement>) => handleChangeValue(e, field.stateCallback)}
-                            className={field.inputClassName}
-                     />
-                  </label>)
+               return field.HTMLTag === 'input' ? (
+                     <label>{field.label}
+                        <input
+                           type='text'
+                           value={field.value}
+                           onChange={(e: React.FormEvent<HTMLInputElement>) => handleChangeValue(e, field.stateCallback)}
+                           className={field.className}
+                        />
+                     </label>) :
+                  field.HTMLTag === 'textarea' && (
+                     <label>{field.label}
+                        <textarea
+                           value={field.value}
+                           onChange={(e: React.FormEvent<HTMLTextAreaElement>) => handleChangeValue(e, field.stateCallback)}
+                           className={field.className}
+                        />
+                     </label>)
                   ;
             })}
          </form>

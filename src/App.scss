@@ -4,25 +4,5 @@
   align-items: center;
   min-height: 100vh;
 
-  .form-notification-params {
-    display: flex;
-    flex-direction: column;
 
-    label {
-      display: flex;
-      flex-direction: column;
-      text-transform: uppercase;
-      align-items: stretch;
-      margin-top: 5px;
-      width: 500px;
-
-      input {
-        margin-top: 5px;
-
-        &.message {
-          height: 50px;
-        }
-      }
-    }
-  }
 }
