@@ -10,7 +10,7 @@ import logoBell from '../../assets/logo-bell.svg';
 import nyPicture from '../../assets/ny-location.webp';
 
 import NotificationPreviewProps from '../../types/NotificationPreview.d';
-import { stringUtils } from '../../utils/StringUtils';
+import { toCapitalize } from '../../utils/StringUtils';
 
 const logosOnTopScreen = [logoBluetooth, logoWifi, logoBattery];
 
@@ -87,7 +87,7 @@ const GoogleAndroid = (props: NotificationPreviewProps) => {
                   />
                   <div className='buttons'>
                      {buttons?.map((buttonName: string) => buttonName &&
-                        <button>{stringUtils(buttonName)}</button>)}
+                        <button>{toCapitalize(buttonName)}</button>)}
                   </div>
                </div>
             </div>
