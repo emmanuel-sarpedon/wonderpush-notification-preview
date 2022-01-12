@@ -47,6 +47,21 @@
         resize: none;
         height: 80px;
       }
+
+      select {
+        margin-top: 5px;
+        padding: 5px;
+        border-color: #1E8FEB;
+        color: #1E8FEB;
+        &:hover {
+        }
+      }
     }
+  }
+
+  .preview {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
   }
 }

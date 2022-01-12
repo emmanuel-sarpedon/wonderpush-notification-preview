@@ -1,13 +1,20 @@
+// REACT
 import React, { useState } from 'react';
+
+// COMPONENTS
+import Android from './Android/Android';
+import Ios from './IOs/IOs';
+
+// UTILS
 import { Platform } from '../types/Platform.d';
 
-import Android from './Android/Android';
-
 const NotificationPreview = () => {
+   // Handlers
    const handleChangeValue = (e: (React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>), stateCallback: Function) => {
       e.target && stateCallback((e.target as HTMLInputElement).value);
    };
 
+   // States
    const [appName, setAppName] = useState('ExampleApp');
    const [title, setTitle] = useState('Notification Preview');
    const [subtitle, setSubtitle] = useState('');
@@ -18,19 +25,24 @@ const NotificationPreview = () => {
    const [buttonName1, setButtonName1] = useState('Reply');
    const [buttonName2, setButtonName2] = useState('Ignore');
    const [buttonName3, setButtonName3] = useState('Cancel');
-   const [platform, setPlatform] = useState('web:android' as Platform);
+   const [platform, setPlatform] = useState('ios' as Platform);
 
-   const platformProps = {
-      appName: appName,
-      title: title,
-      subtitle: subtitle,
-      message: message,
-      icon: iconUrl,
-      image: attachedImageUrl,
-      buttons: [buttonName1, buttonName2, buttonName3],
-      badge: badgeUrl,
-      platform: platform,
-   };
+   const platformOptions = [{
+      label: 'Google Android',
+      value: 'android',
+   }, {
+      label: 'iOS',
+      value: 'ios',
+   }, {
+      label: 'Web: macOS',
+      value: 'web:macos',
+   }, {
+      label: 'Web: Windows',
+      value: 'web:windows',
+   }, {
+      label: 'Web: Android',
+      value: 'web:android',
+   }];
 
    const formFields = [{
       label: 'Your app name',
@@ -94,23 +106,19 @@ const NotificationPreview = () => {
       className: 'button-name',
    }];
 
-   const platformOptions = [{
-      label: 'Google Android',
-      value: 'android',
-   }, {
-      label: 'iOS',
-      value: 'ios',
-   }, {
-      label: 'Web: macOS',
-      value: 'web:macos',
-   }, {
-      label: 'Web: Windows',
-      value: 'web:windows',
-   }, {
-      label: 'Web: Android',
-      value: 'web:android',
-   }];
+   const platformProps = {
+      appName: appName,
+      title: title,
+      subtitle: subtitle,
+      message: message,
+      icon: iconUrl,
+      image: attachedImageUrl,
+      buttons: [buttonName1, buttonName2, buttonName3],
+      badge: badgeUrl,
+      platform: platform,
+   };
 
+   // Render
    return (
       <div className='notification-preview'>
          <form className='form-notification-params'>
@@ -150,12 +158,13 @@ const NotificationPreview = () => {
             </label>
          </form>
 
-         {((platform) === 'android' || (platform) === 'web:android') && <Android {...platformProps} />}
+         <div className='preview'>
+            {platform === 'android' && <Android {...platformProps} />}
+            {platform === 'web:android' && <Android {...platformProps} />}
+            {platform === 'ios' && <Ios {...platformProps} />}
+         </div>
       </div>
-   )
-      ;
-
-
+   );
 };
 
 export default NotificationPreview;

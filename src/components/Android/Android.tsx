@@ -1,7 +1,7 @@
 // REACT
 import React, { useState, useEffect } from 'react';
 
-// COMPONENTS
+// UTILS
 import NotificationPreviewProps from '../../types/NotificationPreview.d';
 import { toCapitalize } from '../../utils/StringUtils';
 
@@ -43,7 +43,7 @@ const Android = (props: NotificationPreviewProps) => {
    };
 
    return (
-      <div className='google-android'>
+      <div className='android'>
          {/* DEVICE */}
          <div className='speakers'>
             <div className='speaker' />

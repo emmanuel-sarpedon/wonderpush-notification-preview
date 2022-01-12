@@ -1,0 +1,159 @@
+.ios {
+  position: relative;
+  width: 416px;
+  height: 660px;
+  border: 3.2px solid #F2F2F2;
+  border-top-left-radius: 55px;
+  border-top-right-radius: 55px;
+  border-bottom: none;
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+
+  .side-screen {
+    position: absolute;
+    width: 82px;
+    height: 638px;
+    background-color: #F7F7F7;
+    border: 3px solid #F2F2F2; // TODO : remove comment
+    border-bottom: none;
+
+    &.left {
+      left: 19px;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 10px;
+    }
+
+    &.right {
+      right: 19px;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 10px;
+    }
+  }
+
+  .speakers {
+    display: flex;
+    position: absolute;
+    top: 25px;
+    width: 195px;
+    height: 25px;
+    left: 104px;
+    border: 3.2px solid #F2F2F2;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: none;
+    background-color: white;
+    z-index: 5;
+
+    > div {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      height: 16px;
+
+      .speaker {
+        background-color: #EBEBEB;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+        }
+
+        &:nth-child(1) {
+          margin-right: 19px;
+        }
+
+        &:nth-child(2) {
+          margin-right: 14px;
+        }
+
+        &:nth-child(3) {
+          width: 44px;
+          height: 7px;
+          border-radius: 3.5px;
+          margin-right: 13px;
+        }
+
+        &:nth-child(4) {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          margin-right: 21px;
+        }
+
+        &:nth-child(5) {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .button {
+    position: absolute;
+    width: 3px;
+    background-color: #EBEBEB;
+
+    &.left-side {
+      left: -6px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+
+      &.ringer-switch {
+        height: 33px;
+        top: 100px;
+      }
+
+      &.volume {
+        height: 64px;
+
+        &.volume-up {
+          top: 160px;
+        }
+
+        &.volume-down {
+          top: 240px;
+        }
+      }
+    }
+
+    &.right-side {
+      right: -6px;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+
+      &.lock {
+        top: 130px;
+        height: 80px;
+      }
+    }
+  }
+
+  .screen {
+    height: 630px;
+    width: 340px;
+    margin: 0 auto;
+    background-color: #F7F7F7;
+    //background-color: black;
+    z-index: 1;
+    //border: 1px solid black; // TODO : delete
+
+    .status-bar {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 5px;
+
+      img {
+        height: 12px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
