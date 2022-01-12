@@ -15,6 +15,9 @@
 
     @media (max-width: 1048px) {
       margin-bottom: 50px;
+      width: 100vw;
+      padding: 0 15px;
+      box-sizing: border-box;
     }
 
     label {
@@ -26,6 +29,10 @@
       align-items: stretch;
       margin-top: 10px;
       width: 500px;
+
+      @media (max-width: 1048px) {
+        width: 100%;
+      }
 
       input, textarea {
         font-family: inherit;

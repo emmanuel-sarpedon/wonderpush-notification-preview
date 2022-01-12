@@ -10,7 +10,9 @@ import logoBluetooth from '../../assets/logo-bluetooth-grey.svg';
 import logoWifi from '../../assets/logo-wifi-grey.svg';
 import logoBattery from '../../assets/logo-battery-grey.svg';
 import logoChevron from '../../assets/logo-chevron.svg';
+import logoChrome from '../../assets/logo-chrome-grey.svg';
 import defaultBadge from '../../assets/logo-bell.svg';
+
 const defaultIconUrl = 'https://cdn.by.wonderpush.com/assets/images/logo/logo-icon-plain-256x256.png';
 
 const logosOnTopScreen = [logoBluetooth, logoWifi, logoBattery];
@@ -27,14 +29,14 @@ const currentTime = new Date().toLocaleTimeString([], {
 });
 
 const Android = (props: NotificationPreviewProps) => {
-   const { appName, title, message, badge, icon, image, buttons } = props;
+   const { appName, title, message, badge, icon, image, buttons, platform } = props;
 
    const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
    const [isBrokenImg, setIsBrokenImg] = useState(false);
 
    useEffect(() => {
       setIsBrokenImg(false);
-   }, [image])
+   }, [image]);
 
    const handleClick = () => {
       setIsMinimizedNotification(!isMinimizedNotification);
@@ -66,18 +68,40 @@ const Android = (props: NotificationPreviewProps) => {
             {/*PREVIEW NOTIFICATION*/}
             <div className='notification' onClick={handleClick}>
                <div className='preview-top'>
+
                   <div>
-                     <div className='app-name'>
-                        <img className='bell' src={badge || defaultBadge} alt='logo-bell' />
-                        {appName}
-                        <img className={`chevron ${isMinimizedNotification && 'rotate'}`}
-                             src={logoChevron}
-                             alt='logo-chevron'
-                        />
-                     </div>
+                     {platform === 'android' && (
+                        <>
+                           <div className='name'>
+                              <img className='badge' src={badge || defaultBadge} alt='logo-bell' />
+                              {appName}
+                              <img className={`chevron ${isMinimizedNotification && 'rotate'}`}
+                                   src={logoChevron}
+                                   alt='logo-chevron'
+                              />
+                           </div>
+
+                        </>
+                     )}
+
+                     {platform === 'web:android' && (
+                        <>
+                           <div className='name'>
+                              <img className='badge' src={logoChrome} alt='logo-chrome' />
+                              <span className='browser'>Chrome</span>
+                              <span className='domain'>example.com</span>
+                              <img className={`chevron ${isMinimizedNotification && 'rotate'}`}
+                                   src={logoChevron}
+                                   alt='logo-chevron'
+                              />
+                           </div>
+
+                        </>
+                     )}
                      <div className='title'>{title}</div>
                      <div className='message'>{message}</div>
                   </div>
+
 
                   {(isMinimizedNotification || isBrokenImg) && (
                      <img
@@ -90,16 +114,22 @@ const Android = (props: NotificationPreviewProps) => {
                </div>
 
                <div
-                  className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''} ${isBrokenImg ? 'isBrokenImg' : ''}`}>
-                  {!isBrokenImg && (<img
-                     src={image}
-                     alt='attached'
-                     onError={() => setIsBrokenImg(true)}
-                  />)}
-                  <div className='buttons'>
-                     {buttons?.map((buttonName: string) => buttonName &&
-                        <button>{toCapitalize(buttonName)}</button>)}
-                  </div>
+                  className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''} ${isBrokenImg ? 'isBrokenImg' : ''} ${platform === 'web:android' ? 'isWebAndroid' : ''}`}>
+                  {!isBrokenImg && (
+                     <img
+                        src={image}
+                        alt='attached'
+                        onError={() => setIsBrokenImg(true)}
+                     />)}
+
+                  {/* Display buttons only on mobile*/}
+                  {platform === 'android' && (
+                     <div className='buttons'>
+                        {buttons?.map((buttonName: string) => buttonName &&
+                           <button>{toCapitalize(buttonName)}</button>)}
+                     </div>
+                  )}
+
                </div>
             </div>
          </div>
