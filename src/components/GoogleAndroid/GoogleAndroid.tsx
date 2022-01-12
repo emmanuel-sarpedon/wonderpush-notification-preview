@@ -1,16 +1,17 @@
-import { useState } from 'react';
+// REACT
+import React, { useState, useEffect } from 'react';
 
+// COMPONENTS
+import NotificationPreviewProps from '../../types/NotificationPreview.d';
+import { toCapitalize } from '../../utils/StringUtils';
+
+// ASSETS
 import logoBluetooth from '../../assets/logo-bluetooth-grey.svg';
 import logoWifi from '../../assets/logo-wifi-grey.svg';
 import logoBattery from '../../assets/logo-battery-grey.svg';
 import logoChevron from '../../assets/logo-chevron.svg';
-
-import logoWp from '../../assets/logo-wp.png';
-import logoBell from '../../assets/logo-bell.svg';
-import nyPicture from '../../assets/ny-location.webp';
-
-import NotificationPreviewProps from '../../types/NotificationPreview.d';
-import { toCapitalize } from '../../utils/StringUtils';
+import defaultBadge from '../../assets/logo-bell.svg';
+const defaultIconUrl = 'https://cdn.by.wonderpush.com/assets/images/logo/logo-icon-plain-256x256.png';
 
 const logosOnTopScreen = [logoBluetooth, logoWifi, logoBattery];
 
@@ -29,6 +30,11 @@ const GoogleAndroid = (props: NotificationPreviewProps) => {
    const { appName, title, message, badge, icon, image, buttons } = props;
 
    const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
+   const [isBrokenImg, setIsBrokenImg] = useState(false);
+
+   useEffect(() => {
+      setIsBrokenImg(false);
+   }, [image])
 
    const handleClick = () => {
       setIsMinimizedNotification(!isMinimizedNotification);
@@ -62,7 +68,7 @@ const GoogleAndroid = (props: NotificationPreviewProps) => {
                <div className='preview-top'>
                   <div>
                      <div className='app-name'>
-                        <img className='bell' src={badge || logoBell} alt='logo-bell' />
+                        <img className='bell' src={badge || defaultBadge} alt='logo-bell' />
                         {appName}
                         <img className={`chevron ${isMinimizedNotification && 'rotate'}`}
                              src={logoChevron}
@@ -73,18 +79,23 @@ const GoogleAndroid = (props: NotificationPreviewProps) => {
                      <div className='message'>{message}</div>
                   </div>
 
-                  <img style={{ display: isMinimizedNotification ? 'block' : 'none' }}
-                       className='app-logo'
-                       src={icon || logoWp}
-                       alt={'app-logo'} />
+                  {(isMinimizedNotification || isBrokenImg) && (
+                     <img
+                        className='app-logo'
+                        src={icon || defaultIconUrl}
+                        alt={'app-logo'}
+                     />
+                  )}
 
                </div>
 
-               <div className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''}`}>
-                  <img
-                     src={image || nyPicture}
+               <div
+                  className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''} ${isBrokenImg ? 'isBrokenImg' : ''}`}>
+                  {!isBrokenImg && (<img
+                     src={image}
                      alt='attached'
-                  />
+                     onError={() => setIsBrokenImg(true)}
+                  />)}
                   <div className='buttons'>
                      {buttons?.map((buttonName: string) => buttonName &&
                         <button>{toCapitalize(buttonName)}</button>)}
