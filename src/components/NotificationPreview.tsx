@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Platform } from '../types/Platform.d';
 
-import GoogleAndroid from './GoogleAndroid/GoogleAndroid';
+import Android from './Android/Android';
 
 const NotificationPreview = () => {
    const handleChangeValue = (e: (React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>), stateCallback: Function) => {
@@ -18,8 +18,7 @@ const NotificationPreview = () => {
    const [buttonName1, setButtonName1] = useState('Reply');
    const [buttonName2, setButtonName2] = useState('Ignore');
    const [buttonName3, setButtonName3] = useState('Cancel');
-   const [platform] = useState('android' as Platform);
-   // const [platform, setPlatform] = useState('android' as Platform);
+   const [platform, setPlatform] = useState('web:android' as Platform);
 
    const platformProps = {
       appName: appName,
@@ -95,6 +94,23 @@ const NotificationPreview = () => {
       className: 'button-name',
    }];
 
+   const platformOptions = [{
+      label: 'Google Android',
+      value: 'android',
+   }, {
+      label: 'iOS',
+      value: 'ios',
+   }, {
+      label: 'Web: macOS',
+      value: 'web:macos',
+   }, {
+      label: 'Web: Windows',
+      value: 'web:windows',
+   }, {
+      label: 'Web: Android',
+      value: 'web:android',
+   }];
+
    return (
       <div className='notification-preview'>
          <form className='form-notification-params'>
@@ -118,11 +134,26 @@ const NotificationPreview = () => {
                      </label>)
                   ;
             })}
+
+            <label>Platform
+               <select
+                  value={platform as Platform}
+                  onChange={(e: React.FormEvent<HTMLSelectElement>) => setPlatform((e.target as HTMLSelectElement).value as Platform)}>
+
+                  {platformOptions.map(platform => {
+                     return (
+                        <option value={platform.value}>{platform.label}</option>
+                     );
+                  })}
+
+               </select>
+            </label>
          </form>
 
-         {platform === 'android' && <GoogleAndroid {...platformProps} />}
+         {((platform) === 'android' || (platform) === 'web:android') && <Android {...platformProps} />}
       </div>
-   );
+   )
+      ;
 
 
 };

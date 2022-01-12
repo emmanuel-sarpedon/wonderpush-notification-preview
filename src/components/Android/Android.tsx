@@ -26,7 +26,7 @@ const currentTime = new Date().toLocaleTimeString([], {
    minute: '2-digit',
 });
 
-const GoogleAndroid = (props: NotificationPreviewProps) => {
+const Android = (props: NotificationPreviewProps) => {
    const { appName, title, message, badge, icon, image, buttons } = props;
 
    const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
@@ -107,4 +107,4 @@ const GoogleAndroid = (props: NotificationPreviewProps) => {
    );
 };
 
-export default GoogleAndroid;
+export default Android;
