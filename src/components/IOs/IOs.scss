@@ -12,20 +12,20 @@
 
   .side-screen {
     position: absolute;
-    width: 82px;
+    width: 86px;
     height: 638px;
     background-color: #F7F7F7;
     border: 3px solid #F2F2F2; // TODO : remove comment
     border-bottom: none;
 
     &.left {
-      left: 19px;
+      left: 15px;
       border-top-left-radius: 30px;
       border-top-right-radius: 10px;
     }
 
     &.right {
-      right: 19px;
+      right: 15px;
       border-top-right-radius: 30px;
       border-top-left-radius: 10px;
     }
@@ -34,7 +34,7 @@
   .speakers {
     display: flex;
     position: absolute;
-    top: 25px;
+    top: 21px;
     width: 195px;
     height: 25px;
     left: 104px;
@@ -107,18 +107,18 @@
 
       &.ringer-switch {
         height: 33px;
-        top: 100px;
+        top: 113px;
       }
 
       &.volume {
         height: 64px;
 
         &.volume-up {
-          top: 160px;
+          top: 172px;
         }
 
         &.volume-down {
-          top: 240px;
+          top: 252px;
         }
       }
     }
@@ -129,7 +129,7 @@
       border-bottom-right-radius: 2px;
 
       &.lock {
-        top: 130px;
+        top: 150px;
         height: 80px;
       }
     }
@@ -137,12 +137,11 @@
 
   .screen {
     height: 630px;
-    width: 340px;
+    width: 360px;
     margin: 0 auto;
     background-color: #F7F7F7;
-    //background-color: black;
     z-index: 1;
-    //border: 1px solid black; // TODO : delete
+    box-sizing: border-box;
 
     .status-bar {
       margin-top: 10px;
@@ -153,6 +152,137 @@
       img {
         height: 12px;
         margin-left: 10px;
+      }
+    }
+
+    .open-notification {
+      &:hover {
+        cursor: pointer;
+      }
+
+      .notification {
+        background-color: white;
+        margin-top: 8px;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px lightgrey;
+
+        .app-name {
+          text-transform: uppercase;
+          font-size: 13px;
+          color: #555555;
+          padding: 13px;
+          letter-spacing: 0.1px;
+          font-weight: 300;
+          border-bottom: 1.5px solid #BBBBBB;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .default-badge {
+            display: flex;
+            align-items: center;
+
+            .background {
+              background-color: black;
+              display: flex;
+              align-items: center;
+              border-radius: 5px;
+              padding: 1px 4px 5px 4px;
+              margin-right: 8px;
+              width: 22px;
+              height: 22px;
+              box-sizing: border-box;
+
+              > img.badge {
+                height: 100%;
+                width: 100%;
+                margin-right: 8px;
+              }
+            }
+          }
+
+          .custom-badge {
+            display: flex;
+            align-items: center;
+
+            > img.badge {
+              height: 22px;
+              width: 22px;
+              margin-right: 8px;
+            }
+          }
+
+
+          img.close {
+            width: 16px;
+            height: 16px;
+          }
+
+          .close {
+            margin-left: 100px;
+          }
+        }
+
+        .attached-image {
+          height: 180px;
+
+          > img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .app-params {
+          min-height: 25px;
+          padding: 16px;
+          box-sizing: border-box;
+
+          .title, .subtitle {
+            font-weight: 500;
+            font-size: 13px;
+          }
+
+          .message {
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 0.65px;
+          }
+        }
+      }
+
+      .buttons {
+        margin-top: 10px;
+        box-shadow: 0 1px 3px lightgrey;
+        border-radius: 10px;
+
+        > div {
+          height: 54px;
+          background-color: #FAFAFA;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #333333;
+
+          &:hover {
+            cursor: pointer;
+            background-color: white;
+          }
+
+          &:not(:first-child) {
+            border-top: 1px solid #DDDDDD;
+          }
+
+          &:first-child {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+          }
+
+          &:last-child {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+          }
+        }
       }
     }
   }

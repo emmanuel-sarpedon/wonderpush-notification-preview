@@ -32,10 +32,10 @@ const Android = (props: NotificationPreviewProps) => {
    const { appName, title, message, badge, icon, image, buttons, platform } = props;
 
    const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
-   const [isBrokenImg, setIsBrokenImg] = useState(false);
+   const [isUrlAttachedImageBroken, setIsUrlAttachedImageBroken] = useState(false);
 
    useEffect(() => {
-      setIsBrokenImg(false);
+      setIsUrlAttachedImageBroken(false);
    }, [image]);
 
    const handleClick = () => {
@@ -65,10 +65,9 @@ const Android = (props: NotificationPreviewProps) => {
             <div className='current-time'>{currentTime}</div>
             <div className='current-date'>{currentDate}</div>
 
-            {/*PREVIEW NOTIFICATION*/}
+            {/* NOTIFICATION PREVIEW */}
             <div className='notification' onClick={handleClick}>
                <div className='preview-top'>
-
                   <div>
                      {platform === 'android' && (
                         <>
@@ -95,15 +94,14 @@ const Android = (props: NotificationPreviewProps) => {
                                    alt='logo-chevron'
                               />
                            </div>
-
                         </>
                      )}
+
                      <div className='title'>{title}</div>
                      <div className='message'>{message}</div>
                   </div>
 
-
-                  {(isMinimizedNotification || isBrokenImg) && (
+                  {(isMinimizedNotification || isUrlAttachedImageBroken) && (
                      <img
                         className='app-logo'
                         src={icon || defaultIconUrl}
@@ -114,12 +112,12 @@ const Android = (props: NotificationPreviewProps) => {
                </div>
 
                <div
-                  className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''} ${isBrokenImg ? 'isBrokenImg' : ''} ${platform === 'web:android' ? 'isWebAndroid' : ''}`}>
-                  {!isBrokenImg && (
+                  className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''} ${isUrlAttachedImageBroken ? 'isBrokenImg' : ''} ${platform === 'web:android' ? 'isWebAndroid' : ''}`}>
+                  {!isUrlAttachedImageBroken && (
                      <img
                         src={image}
                         alt='attached'
-                        onError={() => setIsBrokenImg(true)}
+                        onError={() => setIsUrlAttachedImageBroken(true)}
                      />)}
 
                   {/* Display buttons only on mobile*/}
