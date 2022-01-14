@@ -37,6 +37,7 @@ const MacOs = (props: NotificationPreviewProps) => {
 
    return (
       <div className="macos">
+         {/* -- Header --*/}
          <div className="status-bar">
             {logosOnTopScreen.slice(0, currentTimePosition).map((logo: any, index: number) => (
                <img key={index} src={logo} alt="logo" />
@@ -49,22 +50,26 @@ const MacOs = (props: NotificationPreviewProps) => {
             ))}
          </div>
 
+         {/*-- Notification container --*/}
          <div
             className="notification"
             onMouseEnter={() => setNotificationIsHoveredOver(true)}
             onMouseLeave={() => setNotificationIsHoveredOver(false)}>
+            {/*-- Close notification --*/}
             <div
                className="close-stick"
                style={{ opacity: notificationIsHoveredOver ? '100%' : '0%' }}>
                ╳
             </div>
 
+            {/*-- Notification body --*/}
             <div className="top-notification">
                <div>
                   <img src={logoChromeColor} alt="chrome-color" />
                   <div>Google Chrome</div>
                </div>
 
+               {/*-- Call to action --*/}
                <div>
                   {!notificationIsMinimized && (
                      <button>
@@ -91,6 +96,7 @@ const MacOs = (props: NotificationPreviewProps) => {
             <div
                className="icon-container"
                style={{ display: !notificationIsMinimized ? 'flex' : 'none' }}>
+               {/*display image only if notification is open*/}
                <img src={icon} alt="icon" className="icon" />
             </div>
 
@@ -101,7 +107,9 @@ const MacOs = (props: NotificationPreviewProps) => {
                   <div className="message">{message}</div>
                </div>
 
+               {/*-- Logo --*/}
                <img
+                  className="logo-img"
                   src={icon}
                   alt="logo-img"
                   style={{

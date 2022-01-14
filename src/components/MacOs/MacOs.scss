@@ -164,10 +164,11 @@
             max-width: 300px;
          }
 
-         > img {
+         > img.logo-img {
             height: 45px;
             width: 45px;
             border-radius: 5px;
+            object-fit: cover;
          }
 
          .option-button {
@@ -183,6 +184,10 @@
             display: flex;
             align-items: center;
             box-shadow: 0 0 10px white;
+
+            &:hover {
+               cursor: default;
+            }
 
             .chevron {
                height: 9px;
