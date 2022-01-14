@@ -214,12 +214,16 @@
             overflow: hidden;
             height: 216px;
 
-            &.isBrokenImg {
-               height: 50px;
-            }
-
             &.isWebAndroid {
                height: 166px;
+            }
+
+            &.isBrokenImg {
+               height: 50px;
+
+               &.isWebAndroid {
+                  height: 0;
+               }
             }
 
             > img {
