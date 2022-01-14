@@ -108,7 +108,7 @@ const IOs = (props: NotificationPreviewProps) => {
                            <img
                               className="attached-image"
                               src={image}
-                              alt="attached-image"
+                              alt="attached-img"
                               onError={() => setIsUrlAttachedImageBroken(true)}
                            />
                         )}
@@ -154,7 +154,7 @@ const IOs = (props: NotificationPreviewProps) => {
                      <div className="attached-image">
                         <img
                            src={image}
-                           alt="attached-image"
+                           alt="attached-img"
                            onError={() => {
                               setIsUrlAttachedImageBroken(true);
                               setIsMinimizedNotification(true);
