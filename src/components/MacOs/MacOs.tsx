@@ -24,7 +24,16 @@ const currentTime = new Date().toLocaleTimeString([], {
 const currentTimePosition = 3;
 
 const MacOs = (props: NotificationPreviewProps) => {
-   const { image, icon } = props;
+   const { icon, title, message, buttons } = props;
+
+   const [notificationIsHoveredOver, setNotificationIsHoveredOver] = useState(false);
+   const [notificationIsMinimized, setNotificationIsMinimized] = useState(true);
+   const [iconImageUrlIsBroken, setIconImageUrlIsBroken] = useState(false);
+   const [displayOptionsList, setDisplayOptionsList] = useState(false);
+
+   useEffect(() => {
+      setIconImageUrlIsBroken(false);
+   }, [icon]);
 
    return (
       <div className="macos">
@@ -40,7 +49,16 @@ const MacOs = (props: NotificationPreviewProps) => {
             ))}
          </div>
 
-         <div className="notification">
+         <div
+            className="notification"
+            onMouseEnter={() => setNotificationIsHoveredOver(true)}
+            onMouseLeave={() => setNotificationIsHoveredOver(false)}>
+            <div
+               className="close-stick"
+               style={{ opacity: notificationIsHoveredOver ? '100%' : '0%' }}>
+               ╳
+            </div>
+
             <div className="top-notification">
                <div>
                   <img src={logoChromeColor} alt="chrome-color" />
@@ -48,21 +66,96 @@ const MacOs = (props: NotificationPreviewProps) => {
                </div>
 
                <div>
-                  <button>
-                     <img src={logoEllipsis} alt="chrome-color" />
-                  </button>
-                  <button>
-                     <img src={logoChevron} alt="chrome-color" />
-                  </button>
+                  {!notificationIsMinimized && (
+                     <button>
+                        <img src={logoEllipsis} alt="ellipsis" />
+                     </button>
+                  )}
+
+                  {(notificationIsHoveredOver || !notificationIsMinimized) && (
+                     <button onClick={() => setNotificationIsMinimized(!notificationIsMinimized)}>
+                        <img
+                           src={logoChevron}
+                           alt="chevron"
+                           className={`chevron ${!notificationIsMinimized ? 'close' : 'open'}`}
+                        />
+                     </button>
+                  )}
+
+                  {notificationIsMinimized && !notificationIsHoveredOver && (
+                     <div className="alert-timestamp">now</div>
+                  )}
                </div>
             </div>
 
-            <div className="icon-container">
+            <div
+               className="icon-container"
+               style={{ display: !notificationIsMinimized ? 'flex' : 'none' }}>
                <img src={icon} alt="icon" className="icon" />
+            </div>
+
+            <div className="app-params">
+               <div>
+                  <div className="title">{title}</div>
+                  <div className="domain">example.com</div>
+                  <div className="message">{message}</div>
+               </div>
+
+               <img
+                  src={icon}
+                  alt="logo-img"
+                  style={{
+                     visibility:
+                        !notificationIsHoveredOver &&
+                        notificationIsMinimized &&
+                        !iconImageUrlIsBroken &&
+                        !displayOptionsList
+                           ? 'visible'
+                           : 'hidden',
+                  }}
+                  onError={() => setIconImageUrlIsBroken(true)}
+               />
+
+               <div
+                  className="option-button"
+                  style={{
+                     display:
+                        (notificationIsHoveredOver || displayOptionsList) && notificationIsMinimized
+                           ? 'flex'
+                           : 'none',
+                  }}
+                  onClick={() => {
+                     setDisplayOptionsList(!displayOptionsList);
+                     setNotificationIsHoveredOver(false);
+                  }}>
+                  {buttons && buttons.filter(Boolean).length > 0 ? (
+                     <span>Options</span>
+                  ) : (
+                     <span>Settings</span>
+                  )}
+
+                  <img src={logoChevron} className="chevron" alt="chevron" />
+
+                  {displayOptionsList && buttons && buttons.filter(Boolean).length > 0 && (
+                     <div className="options-list">
+                        {buttons &&
+                           [...buttons, 'Settings']
+                              .filter(Boolean)
+                              .map((button) => <div className="button">{button}</div>)}
+                     </div>
+                  )}
+               </div>
+            </div>
+
+            <div className="buttons">
+               {!notificationIsMinimized &&
+                  buttons &&
+                  [...buttons, 'Settings']
+                     .filter(Boolean)
+                     .map((button) => <div className="button">{button}</div>)}
             </div>
          </div>
       </div>
    );
 };
-
 export default MacOs;

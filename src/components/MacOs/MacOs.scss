@@ -1,12 +1,17 @@
 .macos {
+   position: relative;
    width: 532px;
    height: 606px;
    background-color: #f8f9fa;
    box-sizing: border-box;
    border: 5px solid #dde1e4;
    border-radius: 5px;
+   overflow: scroll;
 
    .status-bar {
+      position: sticky;
+      background-color: #f8f9fa;
+      top: 0;
       height: 30px;
       border-bottom: 5px solid #dde1e4;
       box-sizing: border-box;
@@ -14,6 +19,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      z-index: 1;
 
       .current-time,
       > img:not(:first-child) {
@@ -26,17 +32,34 @@
    }
 
    .notification {
+      position: relative;
       width: 415px;
-      margin: 25px auto 0 auto;
+      margin: 25px auto 420px auto;
       box-shadow: 0 1px 8px grey;
       border-radius: 10px;
+      background-color: white;
+      box-sizing: border-box;
+
+      .close-stick {
+         background-color: white;
+         height: 25px;
+         width: 25px;
+         position: absolute;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         top: -10px;
+         left: -10px;
+         font-size: 10px;
+         box-shadow: 0 1px 8px grey;
+         border-radius: 100%;
+      }
 
       .top-notification {
          display: flex;
          justify-content: space-between;
          height: 40px;
-         background-color: white;
-         padding: 10px;
+         padding: 5px 10px 0 10px;
          box-sizing: border-box;
          color: grey;
          text-transform: uppercase;
@@ -50,7 +73,7 @@
             height: 100%;
 
             > img {
-               height: 100%;
+               height: 20px;
 
                &:not(:last-child) {
                   margin-right: 10px;
@@ -69,20 +92,145 @@
 
                > img {
                   height: 10px;
+
+                  &.chevron {
+                     transition: all 200ms;
+
+                     &.open {
+                        transform: rotate(90deg);
+                     }
+
+                     &.close {
+                        transform: rotate(180deg);
+                     }
+                  }
+               }
+            }
+         }
+
+         .alert-timestamp {
+            text-transform: none;
+         }
+      }
+
+      .icon-container {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-bottom: 10px;
+         background-color: #e5e5e5;
+         min-height: 180px;
+
+         img.icon {
+            min-height: 130px;
+            width: 100%;
+            display: block;
+         }
+      }
+
+      .app-params {
+         padding: 0 10px 10px 10px;
+         background-color: white;
+         border-bottom-left-radius: 10px;
+         border-bottom-right-radius: 10px;
+         display: flex;
+         justify-content: space-between;
+         align-items: flex-end;
+         box-sizing: border-box;
+
+         .title {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+            max-width: 350px;
+         }
+
+         .domain {
+            letter-spacing: 1px;
+            font-size: 14px;
+            margin-bottom: 1px;
+         }
+
+         .message {
+            letter-spacing: 1px;
+            font-size: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 300px;
+         }
+
+         > img {
+            height: 45px;
+            width: 45px;
+            border-radius: 5px;
+         }
+
+         .option-button {
+            position: absolute;
+            right: 10px;
+            background-color: #dcdcdc;
+            color: grey;
+            padding: 3px 6px 3px 6px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.9px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0 10px white;
+
+            .chevron {
+               height: 9px;
+               margin-left: 6px;
+               transform: rotate(180deg);
+            }
+
+            .options-list {
+               position: absolute;
+               top: 27px;
+               left: 15px;
+               background: white;
+               color: rgba(50, 50, 50);
+               padding: 5px;
+               border-radius: 5px;
+               box-shadow: 0 2px 8px lightgrey;
+
+               .button {
+                  padding: 5px 10px;
+                  border-radius: 5px;
+
+                  &:hover {
+                     background-color: #458ee4;
+                     color: white;
+                     cursor: default;
+                  }
                }
             }
          }
       }
 
-      .icon-container {
-         min-height: 185px;
-         display: flex;
-         justify-content: center;
-         align-items: center;
+      .buttons {
+         min-height: 1px;
+         border-bottom-left-radius: 10px;
+         border-bottom-right-radius: 10px;
 
-         img.icon {
-            min-height: 130px;
-            width: 100%;
+         .button {
+            color: #353535;
+            margin: 0 10px;
+            text-align: center;
+            border-top: 2px solid #f2f2f2;
+            padding: 10px;
+            font-weight: 400;
+            font-size: 15px;
+
+            &:last-child {
+               padding-bottom: 30px;
+            }
          }
       }
    }

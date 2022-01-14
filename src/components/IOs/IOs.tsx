@@ -27,16 +27,16 @@ const currentTime = new Date().toLocaleTimeString([], {
 const IOs = (props: NotificationPreviewProps) => {
    const { appName, title, subtitle, message, badge, image, buttons } = props;
 
-   const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
-   const [isUrlBadgeImageBroken, setIsUrlBadgeImageBroken] = useState(false);
-   const [isUrlAttachedImageBroken, setIsUrlAttachedImageBroken] = useState(false);
+   const [notificationIsMinimized, setNotificationIsMinimized] = useState(false);
+   const [badgeImageUrlIsBroken, setBadgeImageUrlIsBroken] = useState(false);
+   const [attachedImageUrlIsBroken, setAttachedImageUrlIsBroken] = useState(false);
 
    useEffect(() => {
-      setIsUrlBadgeImageBroken(false);
+      setBadgeImageUrlIsBroken(false);
    }, [badge]);
 
    useEffect(() => {
-      setIsUrlAttachedImageBroken(false);
+      setAttachedImageUrlIsBroken(false);
    }, [image]);
 
    return (
@@ -71,10 +71,10 @@ const IOs = (props: NotificationPreviewProps) => {
                <div className="current-time">{currentTime}</div>
                <div className="current-date">{currentDate}</div>
 
-               <div className="notification" onClick={() => setIsMinimizedNotification(false)}>
+               <div className="notification" onClick={() => setNotificationIsMinimized(false)}>
                   <div className="app-name">
                      <div>
-                        {isUrlBadgeImageBroken ? (
+                        {badgeImageUrlIsBroken ? (
                            <div className="default-badge">
                               <div className="background">
                                  <img className="badge" src={defaultBadge} alt="badge" />
@@ -87,7 +87,7 @@ const IOs = (props: NotificationPreviewProps) => {
                                  className="badge"
                                  src={badge}
                                  alt="badge"
-                                 onError={() => setIsUrlBadgeImageBroken(true)}
+                                 onError={() => setBadgeImageUrlIsBroken(true)}
                               />
                               {appName}
                            </div>
@@ -104,12 +104,12 @@ const IOs = (props: NotificationPreviewProps) => {
                      </div>
 
                      <div>
-                        {!isUrlAttachedImageBroken && (
+                        {!attachedImageUrlIsBroken && (
                            <img
                               className="attached-image"
                               src={image}
                               alt="attached-img"
-                              onError={() => setIsUrlAttachedImageBroken(true)}
+                              onError={() => setAttachedImageUrlIsBroken(true)}
                            />
                         )}
                      </div>
@@ -120,12 +120,12 @@ const IOs = (props: NotificationPreviewProps) => {
             {/*-- OPEN NOTIFICATION --*/}
             <div
                className="open-notification"
-               style={{ display: isMinimizedNotification ? 'none' : 'inline-block' }}
+               style={{ display: notificationIsMinimized ? 'none' : 'inline-block' }}
             >
-               <div className="notification" onClick={() => setIsMinimizedNotification(true)}>
+               <div className="notification" onClick={() => setNotificationIsMinimized(true)}>
                   <div className="app-name">
                      <div>
-                        {isUrlBadgeImageBroken ? (
+                        {badgeImageUrlIsBroken ? (
                            <div className="default-badge">
                               <div className="background">
                                  <img className="badge" src={defaultBadge} alt="badge" />
@@ -139,7 +139,7 @@ const IOs = (props: NotificationPreviewProps) => {
                                  src={badge}
                                  alt="badge"
                                  onError={() => {
-                                    setIsUrlBadgeImageBroken(true);
+                                    setBadgeImageUrlIsBroken(true);
                                  }}
                               />
                               {appName}
@@ -150,14 +150,14 @@ const IOs = (props: NotificationPreviewProps) => {
                      <img className="close" src={logoClose} alt="logo-close" />
                   </div>
 
-                  {!isUrlAttachedImageBroken && (
+                  {!attachedImageUrlIsBroken && (
                      <div className="attached-image">
                         <img
                            src={image}
                            alt="attached-img"
                            onError={() => {
-                              setIsUrlAttachedImageBroken(true);
-                              setIsMinimizedNotification(true);
+                              setAttachedImageUrlIsBroken(true);
+                              setNotificationIsMinimized(true);
                            }}
                         />
                      </div>

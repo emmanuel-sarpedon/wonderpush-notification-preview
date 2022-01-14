@@ -31,15 +31,15 @@ const currentTime = new Date().toLocaleTimeString([], {
 const Android = (props: NotificationPreviewProps) => {
    const { appName, title, message, badge, icon, image, buttons, platform } = props;
 
-   const [isMinimizedNotification, setIsMinimizedNotification] = useState(false);
-   const [isUrlAttachedImageBroken, setIsUrlAttachedImageBroken] = useState(false);
+   const [notificationIsMinimized, setNotificationIsMinimized] = useState(false);
+   const [attachedImageUrlIsBroken, setAttachedImageUrlIsBroken] = useState(false);
 
    useEffect(() => {
-      setIsUrlAttachedImageBroken(false);
+      setAttachedImageUrlIsBroken(false);
    }, [image]);
 
    const handleClick = () => {
-      setIsMinimizedNotification(!isMinimizedNotification);
+      setNotificationIsMinimized(!notificationIsMinimized);
    };
 
    return (
@@ -74,7 +74,7 @@ const Android = (props: NotificationPreviewProps) => {
                            <div className='name'>
                               <img className='badge' src={badge || defaultBadge} alt='logo-bell' />
                               {appName}
-                              <img className={`chevron ${isMinimizedNotification && 'rotate'}`}
+                              <img className={`chevron ${notificationIsMinimized && 'rotate'}`}
                                    src={logoChevron}
                                    alt='logo-chevron'
                               />
@@ -89,7 +89,7 @@ const Android = (props: NotificationPreviewProps) => {
                               <img className='badge' src={logoChrome} alt='logo-chrome' />
                               <span className='browser'>Chrome</span>
                               <span className='domain'>example.com</span>
-                              <img className={`chevron ${isMinimizedNotification && 'rotate'}`}
+                              <img className={`chevron ${notificationIsMinimized && 'rotate'}`}
                                    src={logoChevron}
                                    alt='logo-chevron'
                               />
@@ -101,7 +101,7 @@ const Android = (props: NotificationPreviewProps) => {
                      <div className='message'>{message}</div>
                   </div>
 
-                  {(isMinimizedNotification || isUrlAttachedImageBroken) && (
+                  {(notificationIsMinimized || attachedImageUrlIsBroken) && (
                      <img
                         className='app-logo'
                         src={icon || defaultIconUrl}
@@ -112,12 +112,12 @@ const Android = (props: NotificationPreviewProps) => {
                </div>
 
                <div
-                  className={`preview-bottom ${isMinimizedNotification ? 'hidden' : ''} ${isUrlAttachedImageBroken ? 'isBrokenImg' : ''} ${platform === 'web:android' ? 'isWebAndroid' : ''}`}>
-                  {!isUrlAttachedImageBroken && (
+                  className={`preview-bottom ${notificationIsMinimized ? 'hidden' : ''} ${attachedImageUrlIsBroken ? 'isBrokenImg' : ''} ${platform === 'web:android' ? 'isWebAndroid' : ''}`}>
+                  {!attachedImageUrlIsBroken && (
                      <img
                         src={image}
                         alt='attached'
-                        onError={() => setIsUrlAttachedImageBroken(true)}
+                        onError={() => setAttachedImageUrlIsBroken(true)}
                      />)}
 
                   {/* Display buttons only on mobile*/}
