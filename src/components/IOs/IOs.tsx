@@ -96,7 +96,7 @@ const IOs = (props: NotificationPreviewProps) => {
                      <span>now</span>
                   </div>
 
-                  <div className="app-params">
+                  <div className="notification-params">
                      <div>
                         <div className="title">{title}</div>
                         <div className="subtitle">{subtitle}</div>
@@ -163,7 +163,7 @@ const IOs = (props: NotificationPreviewProps) => {
                      </div>
                   )}
 
-                  <div className="app-params">
+                  <div className="notification-params">
                      <div className="title">{title}</div>
                      <div className="subtitle">{subtitle}</div>
                      <div className="message">{message}</div>

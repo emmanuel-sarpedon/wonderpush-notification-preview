@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Android from './Android/Android';
 import Ios from './IOs/IOs';
 import MacOs from './MacOs/MacOs';
+import Windows from './Windows/Windows';
 
 // UTILS
 import { Platform } from '../types/Platform.d';
@@ -33,7 +34,7 @@ const NotificationPreview = () => {
    const [buttonName1, setButtonName1] = useState('Reply');
    const [buttonName2, setButtonName2] = useState('Ignore');
    const [buttonName3, setButtonName3] = useState('Cancel');
-   const [platform, setPlatform] = useState('web:macos' as Platform);
+   const [platform, setPlatform] = useState('web:windows' as Platform);
 
    const platformOptions = [
       {
@@ -182,8 +183,7 @@ const NotificationPreview = () => {
                   value={platform as Platform}
                   onChange={(e: React.FormEvent<HTMLSelectElement>) =>
                      setPlatform((e.target as HTMLSelectElement).value as Platform)
-                  }
-               >
+                  }>
                   {platformOptions.map((platform: any) => {
                      return <option value={platform.value}>{platform.label}</option>;
                   })}
@@ -196,6 +196,7 @@ const NotificationPreview = () => {
             {platform === 'web:android' && <Android {...platformProps} />}
             {platform === 'ios' && <Ios {...platformProps} />}
             {platform === 'web:macos' && <MacOs {...platformProps} />}
+            {platform === 'web:windows' && <Windows {...platformProps} />}
          </div>
       </div>
    );

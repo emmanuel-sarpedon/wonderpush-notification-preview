@@ -100,7 +100,7 @@ const MacOs = (props: NotificationPreviewProps) => {
                <img src={icon} alt="icon" className="icon" />
             </div>
 
-            <div className="app-params">
+            <div className="notification-params">
                <div>
                   <div className="title">{title}</div>
                   <div className="domain">example.com</div>
