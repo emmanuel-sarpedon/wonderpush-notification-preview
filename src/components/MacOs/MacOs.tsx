@@ -134,7 +134,6 @@ const MacOs = (props: NotificationPreviewProps) => {
                   }}
                   onClick={() => {
                      setDisplayOptionsList(!displayOptionsList);
-                     setNotificationIsHoveredOver(false);
                   }}>
                   {buttons && buttons.filter(Boolean).length > 0 ? (
                      <span>Options</span>
@@ -147,9 +146,16 @@ const MacOs = (props: NotificationPreviewProps) => {
                   {displayOptionsList && buttons && buttons.filter(Boolean).length > 0 && (
                      <div className="options-list">
                         {buttons &&
-                           [...buttons, 'Settings']
-                              .filter(Boolean)
-                              .map((button) => <div className="button">{button}</div>)}
+                           [...buttons, 'Settings'].filter(Boolean).map((button) => (
+                              <div
+                                 onClick={() => {
+                                    setDisplayOptionsList(false);
+                                    setNotificationIsHoveredOver(false);
+                                 }}
+                                 className="button">
+                                 {button}
+                              </div>
+                           ))}
                      </div>
                   )}
                </div>
