@@ -210,9 +210,6 @@
 
          .preview-bottom {
             background-color: white;
-            transition: height 280ms;
-            overflow: hidden;
-            height: 216px;
 
             &.isWebAndroid {
                height: 166px;
@@ -227,32 +224,46 @@
             }
 
             > img {
+               transition: all 300ms;
                display: block;
                margin: 0 auto 15px auto;
                width: 92.5%;
-               min-height: 150px;
-               height: 150px;
+               min-height: 110px;
+               max-height: 160px;
                object-fit: cover;
             }
 
-            &.hidden {
-               height: 0;
+            .buttons {
+               transition: all 300ms;
+               padding: 8px;
+               background-color: #f2f2f2;
+               height: 30px;
+               overflow: hidden;
+
+               button {
+                  background-color: inherit;
+                  border: none;
+                  color: grey;
+                  padding: 10px 8px;
+
+                  &:hover {
+                     background-color: #cecfce;
+                     cursor: pointer;
+                  }
+               }
             }
-         }
 
-         .buttons {
-            padding: 8px;
-            background-color: #f2f2f2;
+            &.hidden {
+               > img {
+                  min-height: 0;
+                  max-height: 0;
+                  margin: 0 auto 0 auto;
+               }
 
-            button {
-               background-color: inherit;
-               border: none;
-               color: grey;
-               padding: 10px 8px;
-
-               &:hover {
-                  background-color: #cecfce;
-                  cursor: pointer;
+               & .buttons {
+                  height: 0;
+                  visibility: hidden;
+                  padding: 0 8px;
                }
             }
          }

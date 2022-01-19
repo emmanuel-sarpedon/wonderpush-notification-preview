@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 // UTILS
 import NotificationPreviewProps from '../../types/NotificationPreview.d';
+import { toCapitalize } from '../../utils/StringUtils';
 
 // ASSETS
 import logoArrow from '../../assets/logo-arrow-right-white.svg';
@@ -76,7 +77,7 @@ const Windows = (props: NotificationPreviewProps) => {
                   buttons
                      .filter(Boolean)
                      .slice(0, 2)
-                     .map((button) => <div>{button}</div>)}
+                     .map((button) => <div>{toCapitalize(button)}</div>)}
             </div>
          </div>
 

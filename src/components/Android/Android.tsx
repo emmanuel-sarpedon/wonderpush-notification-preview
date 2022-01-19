@@ -103,9 +103,17 @@ const Android = (props: NotificationPreviewProps) => {
                      <div className="message">{message}</div>
                   </div>
 
-                  {(notificationIsMinimized || attachedImageUrlIsBroken) && (
-                     <img className="app-icon" src={icon || defaultIconUrl} alt="app-icon" />
-                  )}
+                  <img
+                     className="app-icon"
+                     src={icon || defaultIconUrl}
+                     alt="app-icon"
+                     style={{
+                        visibility:
+                           notificationIsMinimized || attachedImageUrlIsBroken
+                              ? 'visible'
+                              : 'hidden',
+                     }}
+                  />
                </div>
 
                <div
