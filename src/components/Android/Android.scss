@@ -212,7 +212,12 @@
             background-color: white;
 
             &.isWebAndroid {
-               height: 166px;
+               transition: all 300ms;
+               height: 175px;
+
+               &.hidden {
+                  height: 0;
+               }
             }
 
             &.isBrokenImg {

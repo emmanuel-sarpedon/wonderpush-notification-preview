@@ -119,7 +119,7 @@ const Android = (props: NotificationPreviewProps) => {
                <div
                   className={`preview-bottom ${notificationIsMinimized ? 'hidden' : ''} ${
                      attachedImageUrlIsBroken ? 'isBrokenImg' : ''
-                  } ${platform === 'web:android' ? 'isWebAndroid' : ''}`}>
+                  }${platform === 'web:android' ? 'isWebAndroid' : ''}`}>
                   {!attachedImageUrlIsBroken && (
                      <img
                         src={image}
