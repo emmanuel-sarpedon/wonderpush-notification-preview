@@ -1,22 +1,23 @@
 .ios {
    position: relative;
    width: 416px;
-   height: 660px;
+   min-height: 660px;
    border: 3.2px solid #f2f2f2;
    border-top-left-radius: 55px;
    border-top-right-radius: 55px;
    border-bottom: none;
    display: flex;
-   align-items: flex-end;
+   align-items: flex-start;
    box-sizing: border-box;
 
    .side-screen {
       position: absolute;
       width: 86px;
-      height: 638px;
       background-color: #f7f7f7;
       border: 3px solid #f2f2f2;
       border-bottom: none;
+      margin-top: 13px;
+      height: 30px;
 
       &.left {
          left: 15px;
@@ -136,12 +137,16 @@
    }
 
    .screen {
-      height: 630px;
-      width: 360px;
-      margin: 0 auto;
+      min-height: 630px;
+      width: 379px;
+      margin: 30px auto 0 auto;
       background-color: #f7f7f7;
       z-index: 1;
       box-sizing: border-box;
+      border-left: 3.2px solid #f2f2f2;
+      border-top-left-radius: 10px;
+      border-right: 3.2px solid #f2f2f2;
+      border-top-right-radius: 10px;
 
       .status-bar {
          margin-top: 10px;
@@ -177,11 +182,16 @@
 
          .notification {
             min-height: 90px;
+            max-height: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 1px 3px lightgrey;
             padding: 10px;
             box-sizing: border-box;
+            width: 360px;
+            margin: 0 auto;
 
             &:hover {
                cursor: pointer;
@@ -252,7 +262,13 @@
                      font-weight: 300;
                      font-size: 15px;
                      letter-spacing: 0.65px;
-                     margin-bottom: 7px;
+                     width: 300px;
+                     overflow: hidden;
+                     overflow-wrap: break-word;
+                     text-overflow: ellipsis;
+                     display: -webkit-box;
+                     -webkit-line-clamp: 4;
+                     -webkit-box-orient: vertical;
                   }
 
                   img.attached-image {
@@ -267,8 +283,11 @@
 
       .open-notification {
          position: absolute;
-         top: 60px;
+         top: 50px;
+         left: 25px;
          width: 360px;
+         margin: auto;
+
          &:hover {
             cursor: pointer;
          }
@@ -278,6 +297,9 @@
             margin-top: 8px;
             border-radius: 10px;
             box-shadow: 0 1px 3px lightgrey;
+            max-height: 590px;
+            overflow-y: scroll;
+            overflow-x: hidden;
 
             .app-name {
                text-transform: uppercase;
@@ -336,12 +358,11 @@
             }
 
             .attached-image {
-               height: 180px;
-
                > img {
-                  height: 100%;
+                  max-height: 540px;
                   width: 100%;
                   object-fit: cover;
+                  object-position: left top;
                }
             }
 
@@ -360,6 +381,7 @@
                   font-weight: 300;
                   font-size: 15px;
                   letter-spacing: 0.65px;
+                  overflow: hidden;
                }
             }
          }

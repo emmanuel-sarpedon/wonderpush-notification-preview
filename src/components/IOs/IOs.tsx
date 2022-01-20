@@ -1,5 +1,5 @@
 // REACT
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 // UTILS
 import NotificationPreviewProps from '../../types/NotificationPreview.d';
@@ -27,9 +27,20 @@ const currentTime = new Date().toLocaleTimeString([], {
 const IOs = (props: NotificationPreviewProps) => {
    const { appName, title, subtitle, message, badge, image, buttons } = props;
 
+   const notificationRef = useRef<HTMLDivElement>(null); // refers to <div className="notification"/> HTML element
+
+   const [notificationRefHeight, setNotificationRefHeight] = useState(0);
+
    const [notificationIsMinimized, setNotificationIsMinimized] = useState(false);
    const [badgeImageUrlIsBroken, setBadgeImageUrlIsBroken] = useState(false);
    const [attachedImageUrlIsBroken, setAttachedImageUrlIsBroken] = useState(false);
+
+   // handle the dynamic height of the ios device according to the attached image's height
+   useEffect(() => {
+      notificationRef &&
+         notificationRef.current &&
+         setNotificationRefHeight(notificationRef.current.clientHeight);
+   }, [appName, title, subtitle, message, badge, buttons, notificationIsMinimized]);
 
    useEffect(() => {
       setBadgeImageUrlIsBroken(false);
@@ -40,7 +51,13 @@ const IOs = (props: NotificationPreviewProps) => {
    }, [image]);
 
    return (
-      <div className="ios">
+      <div
+         className="ios"
+         style={{
+            height: `${
+               !notificationIsMinimized ? Math.max(notificationRefHeight + 250, 660) : 660
+            }px`,
+         }}>
          {/* DEVICE */}
          <div className="side-screen left" />
          <div className="side-screen right" />
@@ -57,7 +74,13 @@ const IOs = (props: NotificationPreviewProps) => {
          <div className="button left-side volume volume-up" />
          <div className="button left-side volume volume-down" />
          <div className="button right-side lock" />
-         <div className="screen">
+         <div
+            className="screen"
+            style={{
+               height: `${
+                  !notificationIsMinimized ? Math.max(notificationRefHeight + 217, 630) : 630
+               }px`,
+            }}>
             <div className="status-bar">
                {logosOnTopScreen.map((logo: any, index: number) => (
                   <img key={index} src={logo} alt="logo" />
@@ -67,10 +90,11 @@ const IOs = (props: NotificationPreviewProps) => {
             {/* NOTIFICATION PREVIEW */}
 
             {/*-- CLOSE NOTIFICATION --*/}
-            <div className="close-notification">
+            <div
+               className="close-notification"
+               style={{ visibility: notificationIsMinimized ? 'visible' : 'hidden' }}>
                <div className="current-time">{currentTime}</div>
                <div className="current-date">{currentDate}</div>
-
                <div className="notification" onClick={() => setNotificationIsMinimized(false)}>
                   <div className="app-name">
                      <div>
@@ -110,6 +134,10 @@ const IOs = (props: NotificationPreviewProps) => {
                               src={image}
                               alt="attached-img"
                               onError={() => setAttachedImageUrlIsBroken(true)}
+                              onLoad={() =>
+                                 notificationRef.current &&
+                                 setNotificationRefHeight(notificationRef.current.clientHeight)
+                              }
                            />
                         )}
                      </div>
@@ -120,9 +148,11 @@ const IOs = (props: NotificationPreviewProps) => {
             {/*-- OPEN NOTIFICATION --*/}
             <div
                className="open-notification"
-               style={{ display: notificationIsMinimized ? 'none' : 'inline-block' }}
-            >
-               <div className="notification" onClick={() => setNotificationIsMinimized(true)}>
+               style={{ display: notificationIsMinimized ? 'none' : 'inline-block' }}>
+               <div
+                  className="notification"
+                  onClick={() => setNotificationIsMinimized(true)}
+                  ref={notificationRef}>
                   <div className="app-name">
                      <div>
                         {badgeImageUrlIsBroken ? (
