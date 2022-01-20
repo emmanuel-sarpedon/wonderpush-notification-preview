@@ -45,6 +45,7 @@ const Windows = (props: NotificationPreviewProps) => {
 
    return (
       <div className="windows">
+         <div className="border" />
          <div
             className="notification"
             onMouseEnter={() => setNotificationIsHoveredOver(true)}
