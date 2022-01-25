@@ -129,7 +129,7 @@ const Android = (props: NotificationPreviewProps) => {
                   )}
 
                   {/* Display buttons only on mobile*/}
-                  {platform === 'android' && (
+                  {platform === 'android' && buttons && buttons.filter(Boolean).length > 0 && (
                      <div className="buttons">
                         {buttons?.map(
                            (buttonName: string) =>
