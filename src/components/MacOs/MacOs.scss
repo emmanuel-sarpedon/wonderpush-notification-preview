@@ -6,7 +6,7 @@
    box-sizing: border-box;
    border: 5px solid #dde1e4;
    border-radius: 5px;
-   overflow: scroll;
+   overflow: auto;
 
    .status-bar {
       position: sticky;
@@ -48,11 +48,15 @@
          display: flex;
          justify-content: center;
          align-items: center;
-         top: -10px;
-         left: -10px;
+         top: -16px;
+         left: -16px;
          font-size: 10px;
          box-shadow: 0 1px 8px grey;
          border-radius: 100%;
+
+         > img {
+            height: 8px;
+         }
       }
 
       .top-notification {

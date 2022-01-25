@@ -13,6 +13,7 @@ import logoList from '../../assets/logo-list.svg';
 import logoChromeColor from '../../assets/logo-chrome-color.svg';
 import logoChevron from '../../assets/logo-chevron-grey.svg';
 import logoEllipsis from '../../assets/logo-ellipsis-grey.svg';
+import logoClose from '../../assets/logo-close-mac.svg';
 
 const logosOnTopScreen = [logoBluetooth, logoWifi, logoVolume, logoSearch, logoList];
 
@@ -59,7 +60,7 @@ const MacOs = (props: NotificationPreviewProps) => {
             <div
                className="close-stick"
                style={{ opacity: notificationIsHoveredOver ? '100%' : '0%' }}>
-               ╳
+               <img src={logoClose} alt="icon" className="icon" />
             </div>
 
             {/*-- Notification body --*/}
@@ -136,12 +137,13 @@ const MacOs = (props: NotificationPreviewProps) => {
                      setDisplayOptionsList(!displayOptionsList);
                   }}>
                   {buttons && buttons.filter(Boolean).length > 0 ? (
-                     <span>Options</span>
+                     <>
+                        <span>Options</span>
+                        <img src={logoChevron} className="chevron" alt="chevron" />
+                     </>
                   ) : (
                      <span>Settings</span>
                   )}
-
-                  <img src={logoChevron} className="chevron" alt="chevron" />
 
                   {displayOptionsList && buttons && buttons.filter(Boolean).length > 0 && (
                      <div className="options-list">
